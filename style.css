@@ -426,11 +426,11 @@ nav {
         padding: 0% 25% 0% 15%;
     }
     .container-3 {
-        margin: 0% 10% 0% 10%;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     .container-3 img {
-        width: 256px;
-        height: 256px;
+        width: 200px;
+        height: 200px;
     }
 }
 
