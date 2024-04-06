@@ -130,6 +130,10 @@ nav {
     background-color: black;
     padding: 0% 0% 0% 10%;
 } 
+/* .brands a {
+    display: flex;
+ flex-wrap: wrap;
+} */
 .container-2 img {
     margin: 20px 0% 20px 5%;
 } 
@@ -417,6 +421,9 @@ nav {
         font-weight: bold;
         color: rgb(206, 55, 0);
         line-height: 90%;
+    }
+    .container-2 {
+        padding: 0% 25% 0% 15%;
     }
     .container-3 {
         margin: 0% 10% 0% 10%;
