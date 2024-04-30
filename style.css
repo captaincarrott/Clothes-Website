@@ -6,6 +6,10 @@
     font-family: 'poppins-bold';
     src: url(fonts/Poppins/Poppins-Bold.ttf);
 }
+@font-face {
+    font-family: 'font awesome';
+    src: url(all.min.css);
+}
 * {
     margin: 0;
     padding: 0;
