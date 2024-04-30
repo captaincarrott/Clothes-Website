@@ -7,9 +7,11 @@
     src: url(fonts/Poppins/Poppins-Bold.ttf);
 }
 @font-face {
-    font-family: 'font awesome';
-    src: url(all.min.css);
-}
+    font-family: 'FontAwesome';
+    src: url('all.min.css');     
+    font-weight: normal;    
+    font-style: normal;
+  }
 * {
     margin: 0;
     padding: 0;
