@@ -21,6 +21,7 @@ nav {
     box-shadow: 0px 0px 4px 0px #888888;
     width: 100%;
     background-color: white;
+    z-index: 1;
 }
 .logo {
     font-weight: bold;
@@ -153,12 +154,168 @@ nav {
 .container-3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    column-gap: 1%;
     justify-items: center;
     margin: 0% 15% 0% 15%;
 }
-.container-3 a {
+.container-3 > div {
     margin-top: 100px;
 }
+
+.star10 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star10:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star20 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star20:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star30 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star30:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star40 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star40:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star50 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star50:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star60 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star60:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star70 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star70:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star80 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star80:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+.star90 {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .star90:after {
+    font-family: FontAwesome;
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 90%;
+    overflow: hidden;
+    color: rgb(206, 55, 0);
+  }
+
 
 @media (max-width: 1024px) {
     nav {
@@ -432,6 +589,9 @@ nav {
         width: 200px;
         height: 200px;
     }
+    .content {
+        padding: 150px 0 0 15%;
+    }
 }
 
 /* Galaxy fold and other small devices */
@@ -535,5 +695,8 @@ nav {
     .container-3 img {
         width: 200px;
         height: 200px;
+    }
+    .content {
+        padding: 150px 0 0 15%;
     }
 }
