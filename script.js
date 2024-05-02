@@ -3,6 +3,8 @@ let DropDown = document.querySelector(".drop-down");
 let DropDownChild = document.querySelector(".drop-down-child");
 let Close = document.querySelector(".close");
 
+// ######################  burger menu  ##############################
+
 MenuBurger.addEventListener("click", () => {
     DropDown.classList.toggle("activ");
 })
@@ -29,6 +31,41 @@ Close.addEventListener("click", () => {
 document.addEventListener("click", (cursor) => {
     if (!DropDown.contains(cursor.target) && !MenuBurger.contains(cursor.target) && !DropDown.classList.contains("toggle")) {
         DropDown.classList.add("disable");
+    }
+});
+
+// ######################  cart menu  ##############################
+
+let cart = document.querySelector(".cart");
+let cartDrop = document.querySelector(".cart-drop-down");
+let CartChildDrop = document.querySelector(".cart-drop-down-child");
+let closeCart = document.querySelector(".close-cart");
+cart.addEventListener("click", () => {
+    cartDrop.classList.toggle("activ");
+})
+
+cart.addEventListener("click", () => {
+    cartDrop.classList.remove("disable");
+})
+
+closeCart.addEventListener("click", () => {
+    cartDrop.classList.toggle("activ");
+})
+
+document.addEventListener("click", (cursor) => {
+    if (!cartDrop.contains(cursor.target) && !cart.contains(cursor.target) && !cartDrop.classList.contains("toggle")) {
+        cartDrop.classList.remove("activ");
+    }
+});
+
+
+
+closeCart.addEventListener("click", () => {
+    cartDrop.classList.toggle("disable");
+})
+document.addEventListener("click", (cursor) => {
+    if (!cartDrop.contains(cursor.target) && !cart.contains(cursor.target) && !cartDrop.classList.contains("toggle")) {
+        cartDrop.classList.add("disable");
     }
 });
 
@@ -217,15 +254,8 @@ async function VeiwProducts() {
             
 
     }
-    
-    // let elem = window.getComputedStyle(document.querySelector(".star"), ':after');
-    // elem.width = "10px"
+
     stars()
-
-
-
-
-
 
     divs[0].innerHTML += `<p>price: ${data[0].price}$</p>`;
     divs[1].innerHTML += `<p>price: ${data[1].price}$</p>`;
@@ -245,6 +275,19 @@ async function VeiwProducts() {
     document.querySelectorAll(".rate")[6].innerHTML += `<div>(${data[6].rating.count}) (${data[6].rating.rate})</div>`;
     document.querySelectorAll(".rate")[7].innerHTML += `<div>(${data[7].rating.count}) (${data[7].rating.rate})</div>`;
 
+    for (let i = 0; i < divs.length; i++) {
+        divs[i].innerHTML += `<button class="atc">Add To Cart</button>`;
+        
+    }
+
+    let buttons = document.querySelectorAll(".atc");
+    let counter = document.querySelector(".counter");
+    for (let i = 0; i < buttons.length; i++) {
+
+            buttons[i].addEventListener('click', () => {
+                counter.textContent = parseInt(counter.textContent) + 1
+            });
+    }
 
 }
 VeiwProducts()
