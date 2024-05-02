@@ -695,6 +695,10 @@ nav {
     .content {
         padding: 150px 0 0 15%;
     }
+    .counter {
+        left: 25px;
+        padding: 5px;
+    }
 }
 
 /* Galaxy fold and other small devices */
