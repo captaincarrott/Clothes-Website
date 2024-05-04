@@ -40,6 +40,8 @@ let cart = document.querySelector(".cart");
 let cartDrop = document.querySelector(".cart-drop-down");
 let CartChildDrop = document.querySelector(".cart-drop-down-child");
 let closeCart = document.querySelector(".close-cart");
+let closeCartbutton = document.querySelector(".btn1");
+
 cart.addEventListener("click", () => {
     cartDrop.classList.toggle("activ");
 })
@@ -49,6 +51,9 @@ cart.addEventListener("click", () => {
 })
 
 closeCart.addEventListener("click", () => {
+    cartDrop.classList.toggle("activ");
+})
+closeCartbutton.addEventListener("click", () => {
     cartDrop.classList.toggle("activ");
 })
 
@@ -282,12 +287,43 @@ async function VeiwProducts() {
 
     let buttons = document.querySelectorAll(".atc");
     let counter = document.querySelector(".counter");
-    for (let i = 0; i < buttons.length; i++) {
+    let cartMenu = document.querySelector(".cart-drop-down-child");
+    let productsDiv = document.createElement("div");
 
-            buttons[i].addEventListener('click', () => {
-                counter.textContent = parseInt(counter.textContent) + 1
-            });
+    cartMenu.appendChild(productsDiv)
+    productsDiv.style.display= "flex";
+    productsDiv.style.flexDirection= "column";
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            counter.classList.remove("hide-counter");
+            counter.textContent = parseInt(counter.textContent) + 1;
+    
+            let added = buttons[i].parentNode;
+            let imgSrc = added.querySelector(".prod .img-a .img").src;
+            let createImg = document.createElement("img");
+            createImg.src = imgSrc;
+            createImg.style.width = "100px";
+            let price = added.childNodes[5].textContent;
+    
+            // Create a new div for each click
+            let newDiv = document.createElement("div");
+            newDiv.style.display= "flex";
+            newDiv.style.alignItems= "center";
+            newDiv.style.justifyContent= "space-between";
+
+            // Add product image to the new div
+            newDiv.appendChild(createImg);
+    
+            // Add price information to the new div
+            newDiv.innerHTML += `${price}<i class="fa-solid fa-less-than"></i><i class="fa-solid fa-greater-than"></i>`;
+    
+            // Append the new div to the products container
+            productsDiv.appendChild(newDiv);
+        });
     }
+
+
 
 }
 VeiwProducts()
