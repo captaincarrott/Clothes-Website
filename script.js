@@ -320,7 +320,7 @@ for (let i = 0; i < buttons.length; i++) {
             let imgSrc = added.querySelector(".prod .img-a .img").src;
             let createImg = document.createElement("img");
             createImg.src = imgSrc;
-            createImg.style.width = "100px";
+            createImg.style.width = "70px";
 
             let price = added.childNodes[5].textContent;
 
