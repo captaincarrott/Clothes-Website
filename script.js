@@ -315,6 +315,7 @@ for (let i = 0; i < buttons.length; i++) {
 
         // Check if the product code has already been clicked
         let clickedProduct = clickedProducts.find(product => product.code === code);
+
         if (!clickedProduct) {
             // If product is not clicked before, create a new div for it
             let imgSrc = added.querySelector(".prod .img-a .img").src;
@@ -347,17 +348,34 @@ for (let i = 0; i < buttons.length; i++) {
 
             // Add the clicked product to the array with its unique identifier
             clickedProducts.push({ code: code, counter: menuCounter, id: productId });
-        } else {
+            
+        } else if (clickedProduct) {
             // Increment menu counter for the clicked product
             clickedProduct.counter++;
             let currentDiv = document.getElementById(clickedProduct.id);
             let pieces = currentDiv.querySelector(".pieces");
             pieces.textContent = clickedProduct.counter;
+            let plus = currentDiv.querySelector(".fa-circle-plus");
+            let minus = currentDiv.querySelector(".fa-circle-minus");
+
+            plus.addEventListener("click", () => {
+                clickedProduct.counter++;
+                pieces.textContent = clickedProduct.counter;
+                counter.textContent = parseInt(counter.textContent) + 1;
+            })
+            minus.addEventListener("click", () => {
+                clickedProduct.counter--;
+                pieces.textContent = clickedProduct.counter;
+                counter.textContent = parseInt(counter.textContent) - 1;
+                if (clickedProduct.counter === 0) {
+                    currentDiv.remove();
+                }
+            })
         }
+
+
     });
 }
-
-
 
 
 }
