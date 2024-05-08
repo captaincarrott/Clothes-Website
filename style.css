@@ -463,6 +463,10 @@ nav {
     display: flex;
     flex-direction: column;
 }
+.fa-circle-plus,
+.fa-circle-minus {
+    cursor: pointer;
+}
 @media (max-width: 1280px) {
     .activ {
         left: 50%;

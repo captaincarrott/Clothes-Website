@@ -334,12 +334,13 @@ for (let i = 0; i < buttons.length; i++) {
             newDiv.style.display = "flex";
             newDiv.style.alignItems = "center";
             newDiv.style.justifyContent = "space-between";
+            newDiv.style.margin = " 10px";
 
             // Add product image to the new div
             newDiv.appendChild(createImg);
 
             // Add price and code information to the new div
-            newDiv.innerHTML += `<div class="pricencode"><div>${price}</div><div class="menuCodes">${code}</div></div><i class="fa-solid fa-less-than"></i><p class="pieces">${menuCounter}</p><i class="fa-solid fa-greater-than"></i>`;
+            newDiv.innerHTML += `<div class="pricencode"><div>${price}</div><div class="menuCodes">${code}</div></div><i class="fa-solid fa-circle-minus fa-lg" style="color: #ce3700;"></i><p class="pieces">${menuCounter}</p><i class="fa-solid fa-circle-plus fa-lg" style="color: #ce3700;"></i>`;
 
             // Append the new div to the products container
             productsDiv.appendChild(newDiv);
