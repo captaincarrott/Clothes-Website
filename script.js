@@ -85,13 +85,14 @@ rates.forEach((rate) => {
     rate.style.fontSize = "14px"
 })
 
-let ApiUrl = "https://fakestoreapi.com/products";
+let ApiUrl = "https://dummyjson.com/products";
 
 async function VeiwProducts() {
     const response = await fetch(`${ApiUrl}`);
     let data = await response.json();
     console.log(data);
-
+    
+ 
     function stars() {
 
         let container = document.querySelector(".container-3");
@@ -101,7 +102,7 @@ async function VeiwProducts() {
                 let div = container.querySelectorAll(".rate")[i]
 
 
-            let num = (data[i].rating.rate); //rate from api
+            let num = (data.products[i].rating); //rate from api
             
 
                 if ((num)) {
@@ -262,23 +263,26 @@ async function VeiwProducts() {
 
     stars()
 
-    divs[0].innerHTML += `<p>price: ${data[0].price}$</p>`;
-    divs[1].innerHTML += `<p>price: ${data[1].price}$</p>`;
-    divs[2].innerHTML += `<p>price: ${data[2].price}$</p>`;
-    divs[3].innerHTML += `<p>price: ${data[3].price}$</p>`;
-    divs[4].innerHTML += `<p>price: ${data[4].price}$</p>`;
-    divs[5].innerHTML += `<p>price: ${data[5].price}$</p>`;
-    divs[6].innerHTML += `<p>price: ${data[6].price}$</p>`;
-    divs[7].innerHTML += `<p>price: ${data[7].price}$</p>`;
+    divs[0].innerHTML += `<p>price: ${data.products[0].price}$</p>`;
+    divs[1].innerHTML += `<p>price: ${data.products[1].price}$</p>`;
+    divs[2].innerHTML += `<p>price: ${data.products[2].price}$</p>`;
+    divs[3].innerHTML += `<p>price: ${data.products[3].price}$</p>`;
+    divs[4].innerHTML += `<p>price: ${data.products[4].price}$</p>`;
+    divs[5].innerHTML += `<p>price: ${data.products[5].price}$</p>`;
+    divs[6].innerHTML += `<p>price: ${data.products[6].price}$</p>`;
+    divs[7].innerHTML += `<p>price: ${data.products[7].price}$</p>`;
 
-    document.querySelectorAll(".rate")[0].innerHTML += `<div>(${data[0].rating.count}) (${data[0].rating.rate})</div>`;
-    document.querySelectorAll(".rate")[1].innerHTML += `<div>(${data[1].rating.count}) (${data[1].rating.rate})</div>`;
-    document.querySelectorAll(".rate")[2].innerHTML += `<div>(${data[2].rating.count}) (${data[2].rating.rate})</div>`;
-    document.querySelectorAll(".rate")[3].innerHTML += `<div>(${data[3].rating.count}) (${data[3].rating.rate})</div>`;
-    document.querySelectorAll(".rate")[4].innerHTML += `<div>(${data[4].rating.count}) (${data[4].rating.rate})</div>`;
-    document.querySelectorAll(".rate")[5].innerHTML += `<div>(${data[5].rating.count}) (${data[5].rating.rate})</div>`;
-    document.querySelectorAll(".rate")[6].innerHTML += `<div>(${data[6].rating.count}) (${data[6].rating.rate})</div>`;
-    document.querySelectorAll(".rate")[7].innerHTML += `<div>(${data[7].rating.count}) (${data[7].rating.rate})</div>`;
+
+    // >>>>>>>>>>>>>>>>>>>>>>>> From Old Api <<<<<<<<<<<<<<<<<<<<<
+
+    // document.querySelectorAll(".rate")[0].innerHTML += `<div>(${data[0].rating.count}) (${data[0].rating.rate})</div>`;
+    // document.querySelectorAll(".rate")[1].innerHTML += `<div>(${data[1].rating.count}) (${data[1].rating.rate})</div>`;
+    // document.querySelectorAll(".rate")[2].innerHTML += `<div>(${data[2].rating.count}) (${data[2].rating.rate})</div>`;
+    // document.querySelectorAll(".rate")[3].innerHTML += `<div>(${data[3].rating.count}) (${data[3].rating.rate})</div>`;
+    // document.querySelectorAll(".rate")[4].innerHTML += `<div>(${data[4].rating.count}) (${data[4].rating.rate})</div>`;
+    // document.querySelectorAll(".rate")[5].innerHTML += `<div>(${data[5].rating.count}) (${data[5].rating.rate})</div>`;
+    // document.querySelectorAll(".rate")[6].innerHTML += `<div>(${data[6].rating.count}) (${data[6].rating.rate})</div>`;
+    // document.querySelectorAll(".rate")[7].innerHTML += `<div>(${data[7].rating.count}) (${data[7].rating.rate})</div>`;
 
     let coder = 0;
     for (let i = 0; i < divs.length; i++) {
@@ -299,6 +303,15 @@ async function VeiwProducts() {
     // Initialize an empty array to store clicked product codes
     // Initialize an empty array to store clicked products
     const clickedProducts = [];
+
+    // Function to update the visibility of the cart counter
+    function updateCounterVisibility() {
+        if (clickedProducts.length === 0) {
+            counter.classList.add("hide-counter");
+        } else {
+            counter.classList.remove("hide-counter");
+        }
+    }
     
     // Function to handle the click event for the plus button
     function handlePlusClick(productId) {
@@ -319,6 +332,7 @@ async function VeiwProducts() {
             // Remove the product from the clickedProducts array
             clickedProducts.splice(clickedProducts.findIndex(product => product.id === productId), 1);
         }
+        updateCounterVisibility();
     }
     
     // Add event listeners to plus and minus buttons
@@ -343,7 +357,7 @@ async function VeiwProducts() {
                 createImg.style.width = "70px";
     
                 let price = added.childNodes[5].textContent;
-    
+                
                 // Create a new unique identifier for the product div
                 let productId = `product-${clickedProducts.length}`;
     
@@ -358,10 +372,10 @@ async function VeiwProducts() {
     
                 // Add product image to the new div
                 newDiv.appendChild(createImg);
-    
+
                 // Add price and code information to the new div
                 newDiv.innerHTML += `<div class="pricencode"><div>${price}</div><div class="menuCodes">${code}</div></div><i class="fa-solid fa-circle-minus fa-lg" style="color: #ce3700;"></i><p class="pieces">${menuCounter}</p><i class="fa-solid fa-circle-plus fa-lg" style="color: #ce3700;"></i>`;
-    
+                console.log(price)
                 // Append the new div to the products container
                 productsDiv.appendChild(newDiv);
     
