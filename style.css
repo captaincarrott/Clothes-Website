@@ -442,6 +442,11 @@ nav {
     display: flex;
     flex-direction: column;
 }
+.infodiv {
+    display: flex;
+    color: gray;
+    font-size: 14px;
+}
 .atc {
     outline: none;
     border-style: none;

@@ -79,9 +79,6 @@ var rates = document.querySelectorAll(".rate");
 let count = document.querySelector(".count");
 
 rates.forEach((rate) => {
-    rate.style.display = "flex";
-    rate.style.alignItems = "center"
-    rate.style.color = "gray"
     rate.style.fontSize = "14px"
 })
 
@@ -92,6 +89,30 @@ async function VeiwProducts() {
     let data = await response.json();
     console.log(data);
     
+    let products = data.products
+    products.forEach(product => {
+        let {id, name, price, rating, stock} = product; // Destructure the product object
+        console.log({id, name, price, rating, stock})
+
+        let infoDiv = document.createElement("div");
+        infoDiv.classList.add("infodiv");
+        let priceElement = document.createElement("p");
+        let ratingElement = document.createElement("p");
+        let stockElement = document.createElement("p");
+        priceElement.textContent = `Price: ${price}`; // Include name and price
+        ratingElement.textContent = `Rate: (${rating})`; // Include name and price
+        stockElement.textContent = `Stock:(${stock})`; // Include name and price
+
+        infoDiv.appendChild(ratingElement);
+        infoDiv.appendChild(stockElement);
+        divs.forEach((div, index) => {
+            if (index === id - 1) { // Assuming id is 1-based and matches the index
+                div.appendChild(priceElement); // Append the price to the corresponding div
+                div.appendChild(infoDiv); // Append the price to the corresponding div
+            }
+        });
+    });
+
  
     function stars() {
 
@@ -263,14 +284,7 @@ async function VeiwProducts() {
 
     stars()
 
-    divs[0].innerHTML += `<p>price: ${data.products[0].price}$</p>`;
-    divs[1].innerHTML += `<p>price: ${data.products[1].price}$</p>`;
-    divs[2].innerHTML += `<p>price: ${data.products[2].price}$</p>`;
-    divs[3].innerHTML += `<p>price: ${data.products[3].price}$</p>`;
-    divs[4].innerHTML += `<p>price: ${data.products[4].price}$</p>`;
-    divs[5].innerHTML += `<p>price: ${data.products[5].price}$</p>`;
-    divs[6].innerHTML += `<p>price: ${data.products[6].price}$</p>`;
-    divs[7].innerHTML += `<p>price: ${data.products[7].price}$</p>`;
+
 
 
     // >>>>>>>>>>>>>>>>>>>>>>>> From Old Api <<<<<<<<<<<<<<<<<<<<<
