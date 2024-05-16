@@ -99,7 +99,7 @@ async function VeiwProducts() {
         let priceElement = document.createElement("p");
         let ratingElement = document.createElement("p");
         let stockElement = document.createElement("p");
-        priceElement.textContent = `Price: ${price}`; // Include name and price
+        priceElement.textContent = `Price: ${price}$`; // Include name and price
         ratingElement.textContent = `Rate: (${rating})`; // Include name and price
         stockElement.textContent = `Stock:(${stock})`; // Include name and price
 
