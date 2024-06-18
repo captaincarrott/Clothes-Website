@@ -11,8 +11,7 @@ MenuBurger.addEventListener("click", () => {
 })
 // close burger menu with (x) button
 Close.addEventListener("click", () => {
-    DropDown.classList.toggle("activ");
-    DropDown.classList.toggle("disable");
+    DropDown.classList.replace("activ", "disable");
 })
 // close burger menu while clicking outside the cart menu
 document.addEventListener("click", (cursor) => {
