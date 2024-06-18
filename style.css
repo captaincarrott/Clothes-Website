@@ -471,6 +471,13 @@ nav {
 .fa-circle-minus {
     cursor: pointer;
 }
+.starsDiv,
+.numDiv {
+    display: inline-block;
+}
+.numDiv {
+    color: grey;
+}
 @media (max-width: 1280px) {
     .activ {
         left: 50%;
@@ -547,7 +554,7 @@ nav {
         transition: 0.5s;
     }
     .disable {
-        position: absolute;
+        position: fixed;
         top: 0%;
         left: 100%;
         width: 0%;
@@ -672,11 +679,11 @@ nav {
 
 @media (max-width: 480px) {
     .container-3 {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        /* display: grid; */
+        /* grid-template-columns: repeat(1, 1fr); */
         column-gap: 10px;
         justify-items: center;
-        margin: 0% 15% 0% 15%;
+        margin: 0% 10% 0% 10%;
     }
     .container-3 img {
         width: 100%;
@@ -789,14 +796,21 @@ nav {
         left: 25px;
         padding: 5px;
     }
+    .infodiv {
+        display: block;
+    }
 }
 
 /* Galaxy fold and other small devices */
 
 @media (min-width: 280px) and (max-width: 320px) {
+    .container-3 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
     nav {
         width: 100%;
-        padding: 10px 15% 10px 15%;
+        padding: 10px 10% 10px 10%;
     }
     .logo {
         font-size: 24px;

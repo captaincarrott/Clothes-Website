@@ -1,79 +1,56 @@
+// burger menu  
 let MenuBurger = document.querySelector(".menu");
 let DropDown = document.querySelector(".drop-down");
 let DropDownChild = document.querySelector(".drop-down-child");
 let Close = document.querySelector(".close");
-
-// ######################  burger menu  ##############################
-
+function burgerMenu() {
+// click on burger icon
 MenuBurger.addEventListener("click", () => {
     DropDown.classList.toggle("activ");
-})
-
-MenuBurger.addEventListener("click", () => {
     DropDown.classList.remove("disable");
 })
-
+// close burger menu with (x) button
 Close.addEventListener("click", () => {
     DropDown.classList.toggle("activ");
-})
-
-document.addEventListener("click", (cursor) => {
-    if (!DropDown.contains(cursor.target) && !MenuBurger.contains(cursor.target) && !DropDown.classList.contains("toggle")) {
-        DropDown.classList.remove("activ");
-    }
-});
-
-
-
-Close.addEventListener("click", () => {
     DropDown.classList.toggle("disable");
 })
+// close burger menu while clicking outside the cart menu
 document.addEventListener("click", (cursor) => {
     if (!DropDown.contains(cursor.target) && !MenuBurger.contains(cursor.target) && !DropDown.classList.contains("toggle")) {
-        DropDown.classList.add("disable");
+        DropDown.classList.replace("activ", "disable");
     }
 });
-
-// ######################  cart menu  ##############################
-
+}
+burgerMenu()
+// cart menu
 let cart = document.querySelector(".cart");
 let cartDrop = document.querySelector(".cart-drop-down");
 let CartChildDrop = document.querySelector(".cart-drop-down-child");
 let closeCart = document.querySelector(".close-cart");
 let closeCartbutton = document.querySelector(".btn1");
-
+let minusButtons = document.querySelectorAll(".fa-circle-minus");
+function cartMenu() {
+// click on cart icon
 cart.addEventListener("click", () => {
     cartDrop.classList.toggle("activ");
-})
-
-cart.addEventListener("click", () => {
     cartDrop.classList.remove("disable");
 })
-
+// close cart with (x) button
 closeCart.addEventListener("click", () => {
-    cartDrop.classList.toggle("activ");
+    cartDrop.classList.replace("activ", "disable");
 })
+// the other close button named close
 closeCartbutton.addEventListener("click", () => {
-    cartDrop.classList.toggle("activ");
+    cartDrop.classList.replace("activ", "disable");
 })
-
+// close cart menu while clicking outside the cart menu
 document.addEventListener("click", (cursor) => {
-    if (!cartDrop.contains(cursor.target) && !cart.contains(cursor.target) && !cartDrop.classList.contains("toggle")) {
-        cartDrop.classList.remove("activ");
+    if (!cartDrop.contains(cursor.target) && !cart.contains(cursor.target) && !cartDrop.classList.contains("toggle") && !cursor.target.classList.contains("fa-circle-minus")) {
+        cartDrop.classList.replace("activ","disable");
     }
 });
-
-
-
-closeCart.addEventListener("click", () => {
-    cartDrop.classList.toggle("disable");
-})
-document.addEventListener("click", (cursor) => {
-    if (!cartDrop.contains(cursor.target) && !cart.contains(cursor.target) && !cartDrop.classList.contains("toggle")) {
-        cartDrop.classList.add("disable");
-    }
-});
-
+}
+cartMenu()
 let divs = document.querySelectorAll(".prod");
 var rates = document.querySelectorAll(".rate");
 let count = document.querySelector(".count");
@@ -97,13 +74,10 @@ async function VeiwProducts() {
         let infoDiv = document.createElement("div");
         infoDiv.classList.add("infodiv");
         let priceElement = document.createElement("p");
-        let ratingElement = document.createElement("p");
-        let stockElement = document.createElement("p");
+        let stockElement = document.createElement("div");
         priceElement.textContent = `Price: ${price}$`; // Include name and price
-        ratingElement.textContent = `Rate: (${rating})`; // Include name and price
         stockElement.textContent = `Stock:(${stock})`; // Include name and price
-
-        infoDiv.appendChild(ratingElement);
+        
         infoDiv.appendChild(stockElement);
         divs.forEach((div, index) => {
             if (index === id - 1) { // Assuming id is 1-based and matches the index
@@ -119,155 +93,161 @@ async function VeiwProducts() {
         let container = document.querySelector(".container-3");
 
             for (let i = 0; i < rates.length; i++) {
+                let num = (data.products[i].rating); //rate from api
+                let ratediv = container.querySelectorAll(".rate")[i]
 
-                let div = container.querySelectorAll(".rate")[i]
+                let starsDiv = document.createElement("div");
+                let numDiv = document.createElement("div");
+                starsDiv.classList.add("starsDiv");
+                numDiv.classList.add("numDiv");
+                ratediv.appendChild(starsDiv);
+                ratediv.appendChild(numDiv);
+                numDiv.textContent = `(${num})`
 
-
-            let num = (data.products[i].rating); //rate from api
             
-
+            
                 if ((num)) {
-                div.innerHTML = '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-
+                starsDiv.innerHTML = '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                    
 
                     if (num % 1 === 0) {
                         if (num === 1) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num === 2) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
 
                         }else if (num === 3) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
 
                         }else if (num === 4) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
 
                         }else if (num === 5) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
 
                         }
                     }else {
 
                         if (num < 0.5) {
-                            div.innerHTML = '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
             
                         }else if (num === 0.5) {
-                            div.innerHTML = '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num > 0.5 && num < 1) {
-                            div.innerHTML = '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num < 1.5 && num > 1) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num === 1.5) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num > 1.5 && num < 2) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num < 2.5 && num > 2) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num === 2.5) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num > 2.5 && num < 3) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
                         }else if (num < 3.5 && num > 3) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
             
                         }else if (num === 3.5) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
             
                         }else if (num > 3.5 && num < 4) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star" style="color: #ce3700;"></i>';
             
                         }else if (num < 4.5 && num > 4) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star40" style="color: #ce3700;"></i>';
             
                         }else if (num === 4.5) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star-half-alt" style="color: #ce3700;"></i>';
             
                         }else if (num > 4.5 && num < 5) {
-                            div.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
-                            div.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML = '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa fa-star" style="color: #ce3700;"></i>';
+                            starsDiv.innerHTML += '<i class="fa-regular fa-star star60" style="color: #ce3700;"></i>';
             
                         }
                     }
@@ -283,20 +263,6 @@ async function VeiwProducts() {
     }
 
     stars()
-
-
-
-
-    // >>>>>>>>>>>>>>>>>>>>>>>> From Old Api <<<<<<<<<<<<<<<<<<<<<
-
-    // document.querySelectorAll(".rate")[0].innerHTML += `<div>(${data[0].rating.count}) (${data[0].rating.rate})</div>`;
-    // document.querySelectorAll(".rate")[1].innerHTML += `<div>(${data[1].rating.count}) (${data[1].rating.rate})</div>`;
-    // document.querySelectorAll(".rate")[2].innerHTML += `<div>(${data[2].rating.count}) (${data[2].rating.rate})</div>`;
-    // document.querySelectorAll(".rate")[3].innerHTML += `<div>(${data[3].rating.count}) (${data[3].rating.rate})</div>`;
-    // document.querySelectorAll(".rate")[4].innerHTML += `<div>(${data[4].rating.count}) (${data[4].rating.rate})</div>`;
-    // document.querySelectorAll(".rate")[5].innerHTML += `<div>(${data[5].rating.count}) (${data[5].rating.rate})</div>`;
-    // document.querySelectorAll(".rate")[6].innerHTML += `<div>(${data[6].rating.count}) (${data[6].rating.rate})</div>`;
-    // document.querySelectorAll(".rate")[7].innerHTML += `<div>(${data[7].rating.count}) (${data[7].rating.rate})</div>`;
 
     let coder = 0;
     for (let i = 0; i < divs.length; i++) {
@@ -315,7 +281,6 @@ async function VeiwProducts() {
     productsDiv.style.flexDirection = "column";
     
     // Initialize an empty array to store clicked product codes
-    // Initialize an empty array to store clicked products
     const clickedProducts = [];
 
     // Function to update the visibility of the cart counter
@@ -396,7 +361,7 @@ async function VeiwProducts() {
                 // Add the clicked product to the array with its unique identifier
                 clickedProducts.push({ code: code, counter: menuCounter, id: productId });
     
-                // Retrieve plus and minus buttons for the new product and add event listeners
+                // plus and minus buttons for the new product and add event listeners
                 let plus = newDiv.querySelector(".fa-circle-plus");
                 let minus = newDiv.querySelector(".fa-circle-minus");
                 
