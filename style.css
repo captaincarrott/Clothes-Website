@@ -394,7 +394,7 @@ nav {
 .buttons {
     display: flex;
     position: sticky;
-    top: 820px;
+    top: 100%;
     left: 0px;
     width: 100%;
 }
