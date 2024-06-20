@@ -4,7 +4,6 @@ let DropDown = document.querySelector(".drop-down");
 let DropDownChild = document.querySelector(".drop-down-child");
 let Close = document.querySelector(".close");
 
-function burgerMenu() {
 // click on burger icon
 MenuBurger.addEventListener("click", () => {
     DropDown.classList.toggle("activ");
@@ -20,8 +19,6 @@ document.addEventListener("click", (cursor) => {
         DropDown.classList.replace("activ", "disable");
     }
 });
-}
-burgerMenu()
 
 // cart menu
 let cart = document.querySelector(".cart");
@@ -30,7 +27,7 @@ let CartChildDrop = document.querySelector(".cart-drop-down-child");
 let closeCart = document.querySelector(".close-cart");
 let closeCartbutton = document.querySelector(".btn1");
 let minusButtons = document.querySelectorAll(".fa-circle-minus");
-function cartMenu() {
+
 // click on cart icon
 cart.addEventListener("click", () => {
     cartDrop.classList.toggle("activ");
@@ -50,8 +47,7 @@ document.addEventListener("click", (cursor) => {
         cartDrop.classList.replace("activ","disable");
     }
 });
-}
-cartMenu()
+
 
 let divs = document.querySelectorAll(".prod");
 var rates = document.querySelectorAll(".rate");
