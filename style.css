@@ -465,6 +465,16 @@ nav {
 .numDiv {
     color: grey;
 }
+.rate {
+    font-size: 14px;
+}
+.newdiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    margin: 10px;
+}
 @media (max-width: 1280px) {
     .activ {
         left: 50%;
